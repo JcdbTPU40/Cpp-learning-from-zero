@@ -1,19 +1,12 @@
-#include <string>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
-int main()
-{
-    char LastName;
-    char FirstName;
+int main(){
+    
+    string s;
 
-    cout << "苗字を入力：";
-    cin >> LastName;
-
-    cout << "名前を入力：";
-    cin >> FirstName;
-
-    cout << LastName <<"" << FirstName;
-
+    cout << "文字を入力してください";
+    cin >> s;
 }

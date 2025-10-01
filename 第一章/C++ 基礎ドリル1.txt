@@ -1,0 +1,526 @@
+C++ 基礎ドリル１
+
+A. 用語・概念（短答）
+
+1.C++のソースプログラムが実行可能になるまでの流れを、3語で順に答えよ。
+→#include <iostream>, using namespace std;, int main(){}
+正：コンパイル→リンク→実行
+解説: ソースコードはそのままでは動かない。コンパイルでオブジェクトファイルに変換し、リンクでライブラリなどを結合して初めて実行可能になる。
+
+2.#include <string> の目的を一言で。
+→文字を扱うときに使われる 
+
+3.using namespace std; を書く利点と注意点を一つずつ挙げよ。
+→プログラムに名前つけられる
+正：
+利点: std::cout を cout と簡単に書ける
+
+注意点: 名前が衝突しやすくなる
+
+4.C++プログラムで必ず最初に呼ばれる関数名は？
+→インクルード関数
+正：main関数
+解説：「インクルード関数」というものは存在しない。
+
+C++ で最初に必ず呼ばれるのは main 関数
+
+5.入出力に関するストリーム名を、標準入力／標準出力でそれぞれ1つずつ答えよ。
+→cin, cout
+
+6.次のうちリテラルに当たるものをすべて選べ：3.14, x, "C++", name, 'A'
+→3.14
+正：3.14, "C++", 'A'
+解説：リテラルはコード中に直接書かれる定数値。
+
+"C++", 'A', 3.14 はすべてリテラル。変数名 x や name はリテラルではない。
+
+7.エスケープシーケンスで改行とタブを表すものを書け。
+→\n
+正：\n, \t
+
+8.const を付ける主な目的を一言で。
+→その数字が変わらない、固定であることを表すため
+
+9.rand() の戻り値の範囲を説明せよ（マクロ名を用いてよい）。
+→整数
+正：0 〜 RAND_MAX の範囲の整数
+
+10.演算子の優先順位で * と + はどちらが先に評価されるか。括弧で覆うとどうなるか。
+→*が先になる。しかし、それよりも括弧の中が先になる。
+
+B. コード読み取り（出力予想・空欄補充）
+
+11.出力を答えよ（改行は \n として表記）
+
+23
+26
+
+12.空欄を埋めて1行のコメントと複数行コメントを書け。
+
+___// コメントです
+/* ここから
+   ここまでがコメント */
+
+13.次のプログラムがコンパイルエラーになる理由を一言で。
+
+#include (stream)が書かれていない 理由: ヘッダ <iostream> をインクルードしていない
+
+14.次の入力で name に「Fukukoa A」と入れたい。cin の行を1行追加して完成させよ。
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string name;
+    name = "Fukukoa A";
+    cout << "Hello, " << name << "!\n";
+}
+
+15.文字リテラルと文字列リテラルの違いを、'A' と "A" を使って1文で説明せよ
+
+"A"と'A'に違いはなくどちら使ってもよい。
+正：
+'A' → 文字リテラル（char型, 1文字だけ）
+
+"A" → 文字列リテラル（string/char[]型, 'A' と '\0'を含む）
+
+
+C. ミニ実装（短いコード）
+
+16.円の面積を出力するプログラムを書け。const double PI = 3.14; を使い、半径 r を標準入力から受け取ること。
+
+・入力例: 5
+
+・出力例: Area = 78.5
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    const double PI = 3.1416;  // 円周率
+    double r;      // 半径
+    cout << "半径：";
+    cin >> r;
+    double area = PI * r * r;  // 面積
+    cout << "面積：" << area << endl;
+}
+
+17.乱数でサイコロ(1〜6) を10回振り、結果を空白区切りで1行に出力せよ（rand() と % を使用）。
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int dice;
+    dice = rand() % 6;
+
+    cout << dice, dice, dice, dice ,dice, dice, dice, dice, dice, dice;
+}
+
+正：
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+    srand(time(0));
+    for (int i = 0; i < 10; i++) {
+        int dice = rand() % 6 + 1;
+        cout << dice << " ";
+    }
+}
+解説：同じ変数 dice を10回出力しているだけでランダムにならない。
+
+for 文で rand() % 6 + 1 を繰り返す必要がある。
+
+
+18.整数 x を読み取り、x が偶数なら "even", 奇数なら "odd" と出力するプログラムを書け。
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int x;
+
+    cout  << "整数を入力：";
+    cin >> x;
+
+    if (x % 2)
+    {
+        cout << "\neven";
+    }else
+    {
+        cout << "\nodd";
+    }
+}
+
+正：判定が逆になっている。
+
+if (x % 2 == 0) cout << "even";
+else cout << "odd";
+
+
+19.ユーザーから名字と名前を別々に入力し、間に半角スペースを挟んで1つの string に結合して表示せよ。
+
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    char LastName;
+    char FirstName;
+
+    cout << "苗字を入力：";
+    cin >> LastName;
+
+    cout << "名前を入力：";
+    cin >> FirstName;
+
+    cout << LastName <<"" << FirstName;
+
+}
+
+正：
+string last, first;
+cin >> last >> first;
+cout << last << " " << first;
+解説：
+char では一文字しか入力できない。
+
+名前は string 型で受け取るべき。
+
+
+20.char c を読み取り、c が改行で入力された場合だけ "empty line" と表示する条件分岐を書け（ヒント：'\n'）。
+
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    char c;
+
+    cout << "入力：";
+    cin >> c;
+
+    if (c){
+
+        cout << "empty line";
+
+    }
+
+}
+
+正：
+char c;
+cin.get(c);
+if (c == '\n') {
+    cout << "empty line";
+}
+解説：if (c) では常に真になる。
+
+正しくは if (c == '\n') cout << "empty line";
+
+
+D.エラー修正（デバッグ）
+
+21.次のコードの2箇所の誤りを直せ。
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string s = 'C++';
+    cout << "lang:" << s << endl;
+}
+
+正：
+string s = "C++";    // 文字列リテラルはダブルクォート
+cout << "lang:" << s << endl; // 行末に ; が必要
+
+解説：'C++' は誤り（char型リテラルは1文字だけ）。
+
+"C++" とダブルクォートで書くべき。
+
+22.定数を使って円周率を書いたが、変更できてしまっている。正しく不変にせよ。
+
+double PI = 3.14;
+PI = 3.141;
+
+正：
+const double PI = 3.14;
+解説：定数にするには const をつける必要がある。
+
+23.入力が2つの整数で、和と平均(小数)を出したい。// FIX の部分を直せ。
+
+int a, b;
+cin >> a >> b;
+cout << "sum=" << a + b << "\n";
+cout << "avg=" << (a + b) / 2.0f // FIX
+
+正：
+cout << "avg=" << (a + b) / 2.0 << "\n";
+解説：平均を出すときに整数同士の割り算をすると切り捨てになる。
+
+
+
+E. 思考・説明（短文）
+
+24.using namespace std; を使わずに cout と string を使うときの完全修飾名を書け。
+
+#include <iostream>
+#include <string>
+
+int main(){
+	cout << "test";
+	string;
+}
+
+正：
+std::cout
+
+std::string
+解説：あなたのコードは結局 cout と string をそのまま使っている。
+
+25.次の2つの初期化の違いを1文で説明せよ。
+
+int x; x = 5;
+int y = 5;
+
+xは一度宣言してから５を代入している。yは代入しているだけ。
+(もう少し厳密に: x=5; は代入、int y=5; は初期化)
+
+F.ちょい実践（5〜10行）
+
+26.n を読み取り、1〜n の合計と最大値を出力するプログラムを書け（for 1回でOK）。
+
+入力例: 5
+
+出力例: sum=15 max=5
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main(){
+    int n;
+    
+    cout << "入力してください：";
+    cin >> n;
+
+    cout << "sum=" << n * 3 << "max=" << n;
+}
+
+正：
+int sum = 0;
+for (int i = 1; i <= n; i++) sum += i;
+cout << "sum=" << sum << " max=" << n;
+
+解説：n * 3 では和にならない。
+👉 1〜n の合計は n*(n+1)/2。
+
+27.0〜100の乱数を1つ生成し、50以上なら「High」未満なら「Low」 と表示。さらに数値そのものも出力せよ。
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main(){
+    int random;
+
+    rand() % 100;
+
+    if(random > 50){
+        cout << "High";
+    } else {
+        cout << "Low";
+    }
+}
+
+正：
+srand(time(0));
+int random = rand() % 101;
+cout << random << " ";
+if (random >= 50) cout << "High";
+else cout << "Low";
+
+解説：random に値を代入していないため、未定義のまま使っている。
+👉 int random = rand() % 101; が正解。
+
+28.文字列 s を1つ読み取り、文字数と先頭文字・末尾文字を表示せよ（空文字のときの扱いも自分で決めて分岐）。
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main(){
+    
+    string s;
+
+    cout << "文字を入力してください";
+    cin >> s;
+
+}
+
+正：
+if (s.empty()) {
+    cout << "empty string";
+} else {
+    cout << "length=" << s.size()
+         << " first=" << s.front()
+         << " last=" << s.back();
+}
+
+解説：入力した文字列に対して出力処理が抜けている。
+👉 s.size(), s.front(), s.back() を出力する必要がある。
+
+つまずき：
+
+用語の理解不足（main関数・リテラル・namespace）
+
+型の選択ミス（charとstringの違い）
+
+入力と代入の混同
+
+rand() の使い方（srand初期化や代入忘れ）
+
+演算の性質（整数除算の切り捨て）
+
+---
+
+# 📘 C++ 復習ポイントまとめ
+
+## 1. 用語・基本概念
+
+* **プログラムの流れ**
+  ソースコード → コンパイル → リンク → 実行
+  （「#include」や「main関数を書く」は**書き方**であって流れではない）
+
+* **main関数**
+  C++プログラムで必ず最初に呼ばれるのは `main()`。
+
+* **リテラル**
+  ソースコード中に直接書かれた定数値。
+  例:
+
+  * 数値リテラル → `3.14`, `10`
+  * 文字リテラル → `'A'`
+  * 文字列リテラル → `"C++"`
+    （変数名 `x`, `name` はリテラルではない）
+
+* **using namespace std;**
+
+  * 利点: `std::cout` を `cout` と簡単に書ける
+  * 注意点: 名前の衝突が起こりやすい
+
+* **エスケープシーケンス**
+
+  * 改行: `\n`
+  * タブ: `\t`
+
+* **rand関数**
+  戻り値: `0 ~ RAND_MAX` の整数
+  （乱数の幅を変えるには `%` を使う）
+
+---
+
+## 2. 型とリテラルの違い
+
+* `'A'` → char型（文字, 1文字のみ, 実体は数値コード）
+* `"A"` → string型/char配列（文字列, 'A' と終端文字`\0`を含む）
+  👉 **違いを混同しないこと！**
+
+---
+
+## 3. よくある間違い
+
+* **入力と代入の混同**
+
+  * `cin >> name;` は入力
+  * `name = "文字列";` は代入
+
+* **char と string の使い分け**
+
+  * `char` は1文字しか扱えない
+  * 名前や文章などは必ず `string` 型を使う
+
+* **整数除算の落とし穴**
+
+  * `int a=3, b=4; (a+b)/2` → 3（小数切り捨て）
+  * 小数で計算するには `(a+b)/2.0` と書く
+
+* **rand の使い方**
+
+  * `srand(time(0));` で初期化しないと毎回同じ乱数になる
+  * 例: `rand() % 6 + 1;` → 1〜6 のサイコロ
+
+---
+
+## 4. エラー修正の要点
+
+* `"文字列"` と `'文字'` は使い分ける
+
+  ```cpp
+  string s = "C++"; // 正しい
+  char c = 'A';     // 正しい
+  ```
+* `endl` の後ろに `;` を忘れない
+* 定数は `const` を付ける
+
+  ```cpp
+  const double PI = 3.14;
+  ```
+
+---
+
+## 5. 計算・ループ
+
+* **合計** 1〜n → `n*(n+1)/2`
+* **for文で逐次計算**
+
+  ```cpp
+  int sum=0;
+  for(int i=1; i<=n; i++) sum += i;
+  ```
+
+---
+
+## 6. namespace を使わない書き方
+
+* `std::cout`, `std::string`
+  👉 これが「完全修飾名」
+
+---
+
+## 7. コーディングの注意点
+
+* 出力を予想してから実行する
+* `char` は1文字、`string` は複数文字と覚える
+* 入力（cin）と代入（=）をしっかり区別する
+
+---
+
+✅ これを押さえれば、今回間違えた部分は全部カバーできます。
+
+---
+
+
+
+
+
+

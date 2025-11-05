@@ -10,7 +10,7 @@ int main() {
     const int MAX_DIGITS = 50;
 
     int digitsArr[MAX_DIGITS] = {};
-    cout << "配列の要素数(確認): "<< (sizeof(digitsArr) / sizeof(digitsArr[0])) << "\n\n";
+    cout << "配列の要素数(確認): " << (sizeof(digitsArr) / sizeof(digitsArr[0])) << "\n\n";
 
     string total = "0";
     bool totalNeg = false;
@@ -114,16 +114,19 @@ int main() {
             size_t pos = result.find_first_not_of('0');
             if (pos == string::npos) {
                 result = "0";
-            } else if (pos > 0) {
+            }
+            else if (pos > 0) {
                 result.erase(0, pos);
             }
 
             resultNeg = totalNeg;
-        } else {
+        }
+        else {
             bool totalLess = false;
             if (absTotal.size() != absInput.size()) {
                 totalLess = absTotal.size() < absInput.size();
-            } else {
+            }
+            else {
                 totalLess = absTotal < absInput;
             }
 
@@ -145,7 +148,8 @@ int main() {
                     if (x < y) {
                         x += 10;
                         borrow = 1;
-                    } else {
+                    }
+                    else {
                         borrow = 0;
                     }
                     result[i] = static_cast<char>('0' + (x - y));
@@ -154,12 +158,14 @@ int main() {
                 size_t pos = result.find_first_not_of('0');
                 if (pos == string::npos) {
                     result = "0";
-                } else if (pos > 0) {
+                }
+                else if (pos > 0) {
                     result.erase(0, pos);
                 }
 
                 resultNeg = totalNeg;
-            } else {
+            }
+            else {
                 string a = absInput;
                 string b = absTotal;
                 if (a.size() < b.size()) {
@@ -177,7 +183,8 @@ int main() {
                     if (x < y) {
                         x += 10;
                         borrow = 1;
-                    } else {
+                    }
+                    else {
                         borrow = 0;
                     }
                     result[i] = static_cast<char>('0' + (x - y));
@@ -186,7 +193,8 @@ int main() {
                 size_t pos = result.find_first_not_of('0');
                 if (pos == string::npos) {
                     result = "0";
-                } else if (pos > 0) {
+                }
+                else if (pos > 0) {
                     result.erase(0, pos);
                 }
 
@@ -206,18 +214,19 @@ int main() {
         totalNeg = resultNeg;
 
         string displayBefore = beforeTotal;
+
         while (displayBefore.size() > 1 && displayBefore[0] == '0') {
             displayBefore.erase(0, 1);
         }
         if (displayBefore.empty()) {
             displayBefore = "0";
         }
+
         string showBefore = (beforeNeg ? "-" : "") + displayBefore;
         cout << format("{:>{}}", showBefore, WIDTH) << "\n";
 
         string showDigits = digits;
-        cout << (inputNeg ? '-' : '+')
-             << format("{:>{}}", showDigits, WIDTH - 1) << "\n";
+        cout << (inputNeg ? '-' : '+') << format("{:>{}}", showDigits, WIDTH - 1) << "\n";
 
         cout << string(WIDTH, '-') << "\n";
 
@@ -228,6 +237,7 @@ int main() {
         if (displayAfter.empty()) {
             displayAfter = "0";
         }
+
         string showAfter = (totalNeg ? "-" : "") + displayAfter;
         cout << format("{:>{}}", showAfter, WIDTH) << "\n\n";
     }

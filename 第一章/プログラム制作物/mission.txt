@@ -1,0 +1,85 @@
+全体方針
+
+A〜Fで出てきた用語・文法・乱数・string・for/if などを一通り使う。
+最初はシンプルな課題→少しずつ要素を足した課題にします。
+すべて 第一章 フォルダ内に自分で .cpp ファイルを作って書いてみてください。
+
+課題1：あいさつ＋名前入力プログラム
+
+ファイル名案：Drill1-1-hello_name.cpp
+
+標準入力から、名字と名前（string型）を受け取る。
+「Hello, 名字 名前!」と1行で表示する。
+using namespace std; を使わない書き方で実装する（std::cout, std::string など）。
+
+課題2：簡単な計算機（和と平均）
+
+ファイル名案：Drill1-2-sum_avg.cpp
+
+整数を2つ入力する。
+その和 sum と、平均 avg（小数）を出力する。
+出力例の形式：
+sum=15
+avg=7.5
+平均が必ず小数点付きで計算されるように、型と割り算に注意する。
+
+課題3：サイコロシミュレーター
+
+ファイル名案：Drill1-3-dice10.cpp
+
+srand(time(0)); を使って乱数を初期化する。
+1〜6 の乱数（サイコロ）を10回振り、1行に空白区切りで出力する。
+例：3 6 1 2 5 5 4 1 6 2
+必要なヘッダ（<iostream>, <cstdlib>, <ctime>）を自分で考えて #include する。
+
+課題4：偶数・奇数判定＋範囲チェック
+
+ファイル名案：Drill1-4-even_odd_range.cpp
+
+整数 x を1つ入力する。
+まず x が偶数か奇数か判定して "even" / "odd" と表示。
+さらに x が 0〜100 の範囲内かどうかを判定して、
+範囲内なら "in range"
+範囲外なら "out of range"
+例：
+入力：10 → even in range
+入力：135 → odd out of range
+
+課題5：文字列情報ビューア
+
+ファイル名案：Drill1-5-string_info.cpp
+
+string s を1つ入力する（空白を含まない単語でOK）。
+s が空文字かどうかを判定：
+空なら "empty string" とだけ表示。
+空でないなら：
+文字数（s.size()）
+先頭文字（s.front()）
+末尾文字（s.back()）
+を1行で表示する。
+出力例（Hello を入力したとき）：
+length=5 first=H last=o
+
+課題6：1〜nの合計と最大値（for文練習）
+
+ファイル名案：Drill1-6-sum_max.cpp
+
+整数 n を1つ入力。
+1〜n の合計値と、最大値を出力する。
+合計は for 文で i=1 から i<=n まで回して計算する。
+出力例：
+入力：5
+出力：sum=15 max=5
+
+課題7：High/Low ゲーム
+
+ファイル名案：Drill1-7-high_low_game.cpp
+
+0〜100 の乱数を1つ生成（rand() % 101）し、その値を secret とする。
+ユーザーから整数を1つ入力する（予想値）。
+secret も一緒に出力した上で、
+予想値が secret と同じなら "Hit!"
+予想値が secret より小さいなら "Too low"
+予想値が secret より大きいなら "Too high"
+例：
+secret=73, input=40 → 73 Too high or 73 Too low（どちらをユーザー基準にするかは自分で決めてOK。どちらかに統一して実装）
